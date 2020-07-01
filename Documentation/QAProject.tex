@@ -1,0 +1,109 @@
+\documentclass[12]{article}
+
+%Spell Check
+\usepackage[british]{babel}
+
+% Header & Footer
+\usepackage{lipsum}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{charter}
+
+% Bibliograhpy
+\usepackage[super,numbers,sort&compress]{natbib}
+
+%Image Software
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{float}
+
+%Equation Software
+\usepackage{bm}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[R]{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+	
+	\LARGE{\bf{Kings Casino: Lottery Draw}}\\
+	[1cm]
+	\large{QA Consulting Contract \\ Project Supervisor: Alberto Borghi}\\
+	\large{Chris Lucas: Consultant Project Liason } \\
+	[0.2cm]
+	\line(1,0){400} \\
+	
+\end{center}
+
+
+\end{titlepage}
+
+\cleardoublepage
+
+\section{Introduction} \label{sec:intro}
+
+The purpose of this document is to outline a theoretical project contract that James Harper, Gareth Wilson, or Daryl Atienza might recieve while on a client site.
+\\
+
+\section{Scenario} \label{sec:intro}
+Kings Casino is a highly successful bingo company, specialising in community projects for eldar citizens. Unfortunately with the advancement of Covid-19 a lot of their operations have had to cease as no one can meet up in large groups anymore. Kings casino have opted to reach out to QA consulting for help in bringing their services online, due to the repetitive nature of their business.
+
+\section{Manual User Process}
+Under normal circumstances, Kings Casino would be brought into either community centres or care homes, and set up in a communal area. 
+
+To participate a user would be asked to pay five pounds on Monday to be entered into the compition. This would then be taken down on a workbook by an employee, along with the users first and last name, street address, post code, city, phone number and email. These would be taken down as a means to contect the winner, but also for company finances. 
+
+The competition would compose of a daily draw taken at 9am, starting on the Monday with the last draw on Friday. These numbers would be noted every day, in the same workbook used to note down the user. The users would then be alerted to what number they had drawn every day, and how far behind they were from first place. They would then be presented with the option of paying an extra pound to add another ball roll onto their next daily total. 
+
+On the Friday the user with the highest total number would win 70\% of the earnings. 10\% would go into the next lottery as a form of roll over, to entice more users. The last 20\% would go to Kings Casino to recoup any losses and make a profit.
+
+\section{Data I/O}
+
+In the process of taking this online, new systems are going to have be put in place. 
+
+\subsection{Users}
+Kings Casino would like to keep a record of all their users past and present, this is at QA's discretion how this is kept, but the record would need to contain all the user's details. This would include contact information, VISA details, how many time they have won and a Unique ID. Preferably a user would have the option of changing any of their details, or outright deleting them.
+
+\subsection{Daily Intake}
+A second system would need to be in place to keep a tally of a users' daily actions, such as genorating a random number they had rolled, if they would like to pay extra for another roll and how much money they have put towards the lottery so far. 
+
+\subsection{Reports}
+Ideally there would be a system in place to take note of the highest tally of that day, who it belonged to, and the total pot draw every day. This would then be collated into a weekly report of who entered the lottery, their total number, how many times they rolled, who won, and the total prize.
+
+\subsection{Contact}
+Lastly an email would need to be set up on our behalf due to company comms being down. This would automatically reach out to users every day stating the number they rolled, their total, how far off they are from the first number, and asking if they would like to have another roll at the cost of an extra pound.
+
+\section{Examples}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|llll}
+\cline{1-7}
+FName & LName & Email & Phone Number & Sort Code & Account Number &  &  &  &  \\ \cline{1-7}
+      &       &       &              &           &                &  &  &  &  \\
+      &       &       &              &           &                &  &  &  &  \\
+      &       &       &              &           &                &  &  &  &  \\
+      &       &       &              &           &                &  &  &  &  \\
+      &       &       &              &           &                &  &  &  & 
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|l|l|l|lllll}
+\cline{1-5}
+ & Street Address & Post Code & City & Won Total &  &  &  &  &  \\ \cline{1-5}
+ &                &           &      &           &  &  &  &  &  \\
+ &                &           &      &           &  &  &  &  &  \\
+ &                &           &      &           &  &  &  &  &  \\
+ &                &           &      &           &  &  &  &  &  \\
+ &                &           &      &           &  &  &  &  & 
+\end{tabular}
+\end{table}
+
+\end{document}
