@@ -1,0 +1,15 @@
+[
+	{
+		"OrchestratorQueueName":"Transactions Queue List",
+		"logF_BusinessProcessName":"Framework"
+	},
+	{
+		"MaxRetryNumber":"0",
+		"ExScreenshotsFolderPath":"Exceptions_Screenshots",
+		"LogMessage_GetTransactionData":"Processing Transaction Number: ",
+		"LogMessage_GetTransactionDataError":"Error getting transaction data for Transaction Number: ",
+		"LogMessage_Success":"Transaction Successful.",
+		"LogMessage_BusinessRuleException":"Business rule exception.",
+		"LogMessage_ApplicationException":"System exception."		
+	}
+]
