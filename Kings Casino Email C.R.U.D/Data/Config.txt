@@ -11,5 +11,8 @@
 		"LogMessage_Success":"Transaction Successful.",
 		"LogMessage_BusinessRuleException":"Business rule exception.",
 		"LogMessage_ApplicationException":"System exception."		
+	},
+	{
+		"User Excel Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx"
 	}
 ]
