@@ -1,0 +1,14 @@
+Hello {0},
+
+Commiserations! 
+
+You have not won this weeks competition.
+
+Your draws combined total at the end of the week was{1}!
+
+You were only {2} away from first place! 
+
+We hope to see you again next week and wish you luck!
+
+Best Regards,
+Kings Casino.

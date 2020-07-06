@@ -1,0 +1,10 @@
+Hello {0},
+
+Your daily draw has been processed - your number today is {1}!
+
+You're currently in {2} place!
+
+If you wish to increase your chances, why not add an exta ball in tomorrows draw for only £1?!
+
+Best Regards,
+Kings Casino.
