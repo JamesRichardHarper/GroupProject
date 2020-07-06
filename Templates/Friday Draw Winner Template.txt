@@ -1,0 +1,12 @@
+Hello {0},
+
+Congratulations!! 
+
+You have won this weeks competition!
+
+Your draws combined total at the end of the week was{1}!
+
+You have won {2}! We will be transferring your winnings within the next 3 working days!
+
+Best Regards,
+Kings Casino.
