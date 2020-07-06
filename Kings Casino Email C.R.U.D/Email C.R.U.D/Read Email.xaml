@@ -2,7 +2,9 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Collection of emails from the company email" Name="EmailCollection" Type="OutArgument(scg:List(snm:MailMessage))" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="TotalEmails" Type="InArgument(x:Int32)" />
+    <x:Property Name="TotalEmails" Type="OutArgument(x:Int32)" />
+    <x:Property Name="KingsPass" Type="OutArgument(ss:SecureString)" />
+    <x:Property Name="KingsUser" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -56,17 +58,13 @@
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Reads all the incoming emails from the email specified in the orchestrator credential named" DisplayName="Read_Email" sap:VirtualizedContainerService.HintSize="380,356" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="ss:SecureString" Name="KingsPass" />
-      <Variable x:TypeArguments="x:String" Name="KingsUser" />
-    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="Kings Casino Company Log In" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[KingsPass]" Username="[KingsUser]" />
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[in_Config(&quot;Orchestrator Company Name&quot;).ToString]" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[KingsPass]" Username="[KingsUser]" />
     <ui:GetOutlookMailMessages Filter="{x:Null}" TimeoutMS="{x:Null}" Account="[KingsUser]" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="Inbox" MarkAsRead="False" Messages="[EmailCollection]" OnlyUnreadMessages="False" Top="30" />
     <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>

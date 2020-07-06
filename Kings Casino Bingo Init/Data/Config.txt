@@ -1,6 +1,6 @@
 [
 	{
-		"OrchestratorQueueName":"Transactions Queue List",
+		"Kings Casino Initialised":"Kings Casino: List Initialised",
 		"logF_BusinessProcessName":"Framework",
 		"Orchestrator Company Name":"Kings Casino Company Log In"
 	},
@@ -14,7 +14,7 @@
 		"LogMessage_ApplicationException":"System exception."		
 	},
 	{
-		"User Excel Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx"
+		"User Excel Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx",
 		"User Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx"
 	}
 ]
