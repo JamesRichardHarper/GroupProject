@@ -1672,11 +1672,11 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "Kings Casino Project",
-      "projectName": "Kings Casino Project",
-      "projectPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino Project\\.local",
+      "projectUniqueName": "Kings Casino Email User Bingo",
+      "projectName": "Kings Casino Email User Bingo",
+      "projectPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino Email User Bingo\\.local",
       "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino Project\\.local"
+      "outputPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino Email User Bingo\\.local"
     },
     "frameworks": {
       "net461": {

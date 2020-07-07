@@ -1,6 +1,6 @@
 {
-  "name": "Kings Casino Project",
-  "description": "Final project for QA Consulting. Instantiated with Robotic Enterprise Framework.",
+  "name": "Kings Casino Email User Bingo",
+  "description": "Final project for QA Consulting. This process is ran daily to automate the actions of a bingo company.",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.8.6]",
