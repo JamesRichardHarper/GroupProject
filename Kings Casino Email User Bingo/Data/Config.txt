@@ -1,6 +1,10 @@
 [
 	{
-		"OrchestratorQueueName":"Transactions Queue List",
+		"Monday User Location":"Kings Casino: List Initialised",
+		"Tuesday User Location":"Kings Casino: Tuesday",
+		"Wednesday User Location":"Kings Casino: Wednesday",
+		"Thursday User Location":"Kings Casino: Thursday",
+		"Friday User Location":"Kings Casino: Friday",
 		"logF_BusinessProcessName":"Framework"
 	},
 	{
@@ -11,5 +15,8 @@
 		"LogMessage_Success":"Transaction Successful.",
 		"LogMessage_BusinessRuleException":"Business rule exception.",
 		"LogMessage_ApplicationException":"System exception."		
+	},
+	{
+		"Array instantiated":"For later use"
 	}
 ]
