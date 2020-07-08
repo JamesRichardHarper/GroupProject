@@ -16,6 +16,7 @@
 	{
 		"User Excel Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx",
 		"User Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx",
-		"User Database Daryl":"C:\\Users\\Daryl Atienza\\Desktop\\RPA\\RPA.QA.FINAL PROJECT\\Kings Casino - User Database.xlsx"
+		"User Database Daryl":"C:\\Users\\Daryl Atienza\\Desktop\\RPA\\RPA.QA.FINAL PROJECT\\Kings Casino - User Database.xlsx",
+		"User Database Gareth":"C:\\Users\\garet\\Documents\\QA\\RPA Training\\Assignment3\\GitGroupProject\\GroupProject\\Kings Casino User Database"
 	}
 ]
