@@ -37,7 +37,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="24">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -56,6 +56,12 @@
       <AssemblyReference>Microsoft.VisualStudio.Services.Common</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap:VirtualizedContainerService.HintSize="3842,1246" sap2010:WorkflowViewState.IdRef="Sequence_4">
@@ -71,11 +77,7 @@
         <Variable x:TypeArguments="x:String" Name="RollID" />
         <Variable x:TypeArguments="x:String" Name="HasUserAskedForRoll" />
         <Variable x:TypeArguments="x:String" Name="UniqueID" />
-        <Variable x:TypeArguments="x:Boolean" Name="ExtraRoll">
-          <Variable.Default>
-            <Literal x:TypeArguments="x:Boolean" />
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="x:Boolean" Default="False" Name="ExtraRoll" />
         <Variable x:TypeArguments="x:Int32" Name="TotalRollForToday" />
         <Variable x:TypeArguments="x:String" Name="TodaysQueue" />
         <Variable x:TypeArguments="x:String" Name="RollMonday" />
@@ -86,6 +88,7 @@
         <Variable x:TypeArguments="x:String" Name="FirstName" />
         <Variable x:TypeArguments="x:String" Name="LastName" />
         <Variable x:TypeArguments="x:String" Name="UserEmail" />
+        <Variable x:TypeArguments="scg:List(x:String)" Name="UserWantsRoll" />
       </Flowchart.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -93,41 +96,25 @@
           <av:Point x:Key="ShapeLocation">2733,0</av:Point>
           <av:Size x:Key="ShapeSize">60,75</av:Size>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          <av:PointCollection x:Key="ConnectorLocation">2733,37.5 2703,37.5 2703,58.5 2640,58.5</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">2793,37.5 3100,37.5 3100,182.5 3070,182.5</av:PointCollection>
           <x:Double x:Key="Width">3766</x:Double>
           <x:Double x:Key="Height">1046</x:Double>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <Flowchart.StartNode>
-        <x:Reference>__ReferenceID12</x:Reference>
+        <x:Reference>__ReferenceID19</x:Reference>
       </Flowchart.StartNode>
-      <FlowStep x:Name="__ReferenceID12">
+      <FlowStep x:Name="__ReferenceID19">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">2440,4.5</av:Point>
-            <av:Size x:Key="ShapeSize">200,108</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">2440,58.5 2410,58.5 2410,30 2380,30</av:PointCollection>
+            <av:Point x:Key="ShapeLocation">2870,136</av:Point>
+            <av:Size x:Key="ShapeSize">200,93</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">2870,182.5 2840,182.5 2840,230 2791,230</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:MultipleAssign sap2010:Annotation.AnnotationText="Used to roll the lottery numbers and load in the user email." DisplayName="Multi Assign" sap:VirtualizedContainerService.HintSize="200,108" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+        <ui:MultipleAssign sap2010:Annotation.AnnotationText="Used to load in the user email details." DisplayName="Multi Assign" sap:VirtualizedContainerService.HintSize="200,93" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
           <ui:MultipleAssign.AssignOperations>
             <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:Int32">[RandomRoll]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:Int32">[new Random().Next(1,10)]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:Int32">[SecondRandomRoll]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:Int32">[new Random().Next(1,10)]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
               <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
                 <ui:AssignOperation.To>
                   <OutArgument x:TypeArguments="x:String">[UniqueID]</OutArgument>
@@ -210,402 +197,542 @@
           </sap:WorkflowViewStateService.ViewState>
         </ui:MultipleAssign>
         <FlowStep.Next>
-          <FlowStep x:Name="__ReferenceID4">
+          <FlowStep x:Name="__ReferenceID18">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <av:Point x:Key="ShapeLocation">2180,4.5</av:Point>
-                <av:Size x:Key="ShapeSize">200,51</av:Size>
-                <av:PointCollection x:Key="ConnectorLocation">2180,30 1970,30 1970,56.5</av:PointCollection>
+                <av:Point x:Key="ShapeLocation">2529,200</av:Point>
+                <av:Size x:Key="ShapeSize">262,60</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">2529,230 2520,230 2520,163.5</av:PointCollection>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEach x:TypeArguments="scg:List(x:String)" CurrentIndex="{x:Null}" DisplayName="Iterating through user list" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[io_UserRollList]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="scg:List(x:String)">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="scg:List(x:String)" Name="User" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="User Actions" sap:VirtualizedContainerService.HintSize="526,592" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Assign DisplayName="Assign Random Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RandomRoll]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[new Random().Next(1,10)]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <FlowStep.Next>
+              <FlowDecision x:Name="__ReferenceID13" DisplayName="Is roll list empty" sap:VirtualizedContainerService.HintSize="89,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                <FlowDecision.Condition>
+                  <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="io_UserRollList is Nothing" />
+                </FlowDecision.Condition>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <av:Point x:Key="ShapeLocation">2475.5,76.5</av:Point>
+                    <av:Size x:Key="ShapeSize">89,87</av:Size>
+                    <av:PointCollection x:Key="TrueConnector">2475.5,120 2445.5,120 2445.5,240 2300,240</av:PointCollection>
+                    <av:PointCollection x:Key="FalseConnector">2564.5,120 2594.5,120 2594.5,30 2380,30</av:PointCollection>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <FlowDecision.True>
+                  <FlowStep x:Name="__ReferenceID2">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <av:Point x:Key="ShapeLocation">2100,214.5</av:Point>
+                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                        <av:PointCollection x:Key="ConnectorLocation">2200,265.5 2200,295.5 2150,295.5 2150,340</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="484,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
-                      <ui:MultipleAssign.AssignOperations>
-                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-                            <ui:AssignOperation.To>
-                              <OutArgument x:TypeArguments="x:String">[RollID]</OutArgument>
-                            </ui:AssignOperation.To>
-                            <ui:AssignOperation.Value>
-                              <InArgument x:TypeArguments="x:String">[User(0)]</InArgument>
-                            </ui:AssignOperation.Value>
-                          </ui:AssignOperation>
-                        </scg:List>
-                      </ui:MultipleAssign.AssignOperations>
-                    </ui:MultipleAssign>
-                    <If Condition="[UniqueID = RollID]" sap:VirtualizedContainerService.HintSize="484,362" sap2010:WorkflowViewState.IdRef="If_1">
-                      <If.Then>
-                        <Sequence DisplayName="ID Match" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <ui:LogMessage DisplayName="Log Non Roll User" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[UniqueID + &quot; has not purchased a new roll.&quot; + vbNewLine + &quot;They rolled a &quot; + RandomRoll.ToString]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                    <FlowStep.Next>
+                      <FlowStep x:Name="__ReferenceID7">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <av:Point x:Key="ShapeLocation">2019,340</av:Point>
+                            <av:Size x:Key="ShapeSize">262,60</av:Size>
+                            <av:PointCollection x:Key="ConnectorLocation">2150,400 2150,430 1987.5,430 1987.5,466.5</av:PointCollection>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign DisplayName="Single Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[TotalRollForToday]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[RandomRoll]</InArgument>
+                          </Assign.Value>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <RemoveFromCollection x:TypeArguments="scg:List(x:String)" Collection="[io_UserRollList]" DisplayName="Remove From Collection" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_2" Item="[User]" />
-                          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                            <Assign.To>
-                              <OutArgument x:TypeArguments="x:Boolean">[ExtraRoll]</OutArgument>
-                            </Assign.To>
-                            <Assign.Value>
-                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-                            </Assign.Value>
-                          </Assign>
-                        </Sequence>
-                      </If.Then>
-                    </If>
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-            </ui:ForEach>
-            <FlowStep.Next>
-              <FlowDecision x:Name="__ReferenceID3" DisplayName="Has user asked for 2 rolls" sap:VirtualizedContainerService.HintSize="136,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
-                <FlowDecision.Condition>
-                  <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="ExtraRoll" />
-                </FlowDecision.Condition>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <av:Point x:Key="ShapeLocation">1902,56.5</av:Point>
-                    <av:Size x:Key="ShapeSize">136,87</av:Size>
-                    <x:String x:Key="TrueLabel">User asked for another roll</x:String>
-                    <x:String x:Key="FalseLabel">User has not asked for a nother roll</x:String>
-                    <av:PointCollection x:Key="TrueConnector">1902,100 1800,100 1800,180</av:PointCollection>
-                    <av:PointCollection x:Key="FalseConnector">2038,100 2160,100 2160,180</av:PointCollection>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <FlowDecision.True>
-                  <FlowStep x:Name="__ReferenceID5">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <av:Point x:Key="ShapeLocation">1669,180</av:Point>
-                        <av:Size x:Key="ShapeSize">262,60</av:Size>
-                        <av:PointCollection x:Key="ConnectorLocation">1800,240 1800,270 1962.5,270 1962.5,296.5</av:PointCollection>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Double Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Int32">[TotalRollForToday]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Int32">[RandomRoll + SecondRandomRoll]</InArgument>
-                      </Assign.Value>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </Assign>
-                    <FlowStep.Next>
-                      <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID1" DisplayName="Day detect" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
-                        <FlowSwitch.Default>
-                          <FlowStep x:Name="__ReferenceID2">
+                        </Assign>
+                        <FlowStep.Next>
+                          <FlowSwitch x:TypeArguments="x:String" x:Name="__ReferenceID1" DisplayName="Day detect" Expression="[in_DayOfWeek]" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowSwitch`1_1">
+                            <FlowSwitch.Default>
+                              <FlowStep x:Name="__ReferenceID3">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <av:Point x:Key="ShapeLocation">2460,434.5</av:Point>
+                                    <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Error loading day" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[in_DayOfWeek + &quot; not found.&quot;]">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:LogMessage>
+                              </FlowStep>
+                            </FlowSwitch.Default>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <av:Point x:Key="ShapeLocation">2470,264.5</av:Point>
-                                <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                <av:Point x:Key="ShapeLocation">1935,466.5</av:Point>
+                                <av:Size x:Key="ShapeSize">70,87</av:Size>
+                                <av:PointCollection x:Key="THURSDAYConnector">1970,553.5 1970,583.5 2090,583.5 2090,644.5</av:PointCollection>
+                                <av:PointCollection x:Key="MONDAYConnector">1935,488.25 1480,488.25 1480,644.5</av:PointCollection>
+                                <av:PointCollection x:Key="WEDNESDAYConnector">2005,531.75 2390,531.75 2390,644.5</av:PointCollection>
+                                <av:PointCollection x:Key="TUESDAYConnector">1935,510 1780,510 1780,644.5</av:PointCollection>
+                                <av:PointCollection x:Key="FRIDAYConnector">2005,510 2690,510 2690,644.5</av:PointCollection>
+                                <av:PointCollection x:Key="Default">2005,488.25 2035,488.25 2035,460 2460,460</av:PointCollection>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Error loading day" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[in_DayOfWeek + &quot; not found.&quot;]">
+                            <FlowStep x:Key="THURSDAY" x:Name="__ReferenceID10">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <av:Point x:Key="ShapeLocation">1990,644.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">2090,695.5 2090,759</av:PointCollection>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                            </ui:LogMessage>
-                          </FlowStep>
-                        </FlowSwitch.Default>
-                        <FlowSwitch.Expression>
-                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_DayOfWeek" />
-                        </FlowSwitch.Expression>
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <av:Point x:Key="ShapeLocation">1945,296.5</av:Point>
-                            <av:Size x:Key="ShapeSize">70,87</av:Size>
-                            <av:PointCollection x:Key="THURSDAYConnector">1980,383.5 1980,413.5 2100,413.5 2100,474.5</av:PointCollection>
-                            <av:PointCollection x:Key="MONDAYConnector">1945,318.25 1490,318.25 1490,474.5</av:PointCollection>
-                            <av:PointCollection x:Key="WEDNESDAYConnector">2015,361.75 2400,361.75 2400,474.5</av:PointCollection>
-                            <av:PointCollection x:Key="TUESDAYConnector">1945,340 1790,340 1790,474.5</av:PointCollection>
-                            <av:PointCollection x:Key="FRIDAYConnector">2015,340 2700,340 2700,474.5</av:PointCollection>
-                            <av:PointCollection x:Key="Default">2015,318.25 2045,318.25 2045,290 2470,290</av:PointCollection>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <FlowStep x:Key="THURSDAY" x:Name="__ReferenceID9">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">2000,474.5</av:Point>
-                              <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">2100,525.5 2100,589</av:PointCollection>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:MultipleAssign DisplayName="Assign Thursday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
-                            <ui:MultipleAssign.AssignOperations>
-                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[in_Config("Friday User Location").ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[RollThursday]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[TodaysQueue.ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                              </scg:List>
-                            </ui:MultipleAssign.AssignOperations>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:MultipleAssign>
-                          <FlowStep.Next>
-                            <FlowStep x:Name="__ReferenceID0">
-                              <sap:WorkflowViewStateService.ViewState>
-                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                  <av:Point x:Key="ShapeLocation">2000,589</av:Point>
-                                  <av:Size x:Key="ShapeSize">200,22</av:Size>
-                                </scg:Dictionary>
-                              </sap:WorkflowViewStateService.ViewState>
-                              <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[TodaysQueue]">
-                                <ui:AddQueueItem.ItemInformation>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Unique ID">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UniqueID" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="First Name ">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="FirstName" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Last Name ">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="LastName" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Email ">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UserEmail" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Monday Draw">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollMonday" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Tuesday Draw">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollTuesday" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Wednesday Draw">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollWednesday" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Thursday Draw">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollThursday" />
-                                  </InArgument>
-                                  <InArgument x:TypeArguments="x:String" x:Key="Friday Draw">
-                                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollFriday" />
-                                  </InArgument>
-                                </ui:AddQueueItem.ItemInformation>
+                              <ui:MultipleAssign DisplayName="Assign Thursday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[in_Config("Friday User Location").ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[RollThursday]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[TodaysQueue.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                              </ui:AddQueueItem>
+                              </ui:MultipleAssign>
+                              <FlowStep.Next>
+                                <FlowStep x:Name="__ReferenceID0">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <av:Point x:Key="ShapeLocation">1990,759</av:Point>
+                                      <av:Size x:Key="ShapeSize">200,22</av:Size>
+                                      <av:PointCollection x:Key="ConnectorLocation">2090,781 2090,834.5</av:PointCollection>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[TodaysQueue]">
+                                    <ui:AddQueueItem.ItemInformation>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Unique ID">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UniqueID" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="First Name">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="FirstName" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Last Name">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="LastName" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Email">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UserEmail" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Monday Draw">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollMonday" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Tuesday Draw">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollTuesday" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Wednesday Draw">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollWednesday" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Thursday Draw">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollThursday" />
+                                      </InArgument>
+                                      <InArgument x:TypeArguments="x:String" x:Key="Friday Draw">
+                                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RollFriday" />
+                                      </InArgument>
+                                    </ui:AddQueueItem.ItemInformation>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:AddQueueItem>
+                                  <FlowStep.Next>
+                                    <FlowStep x:Name="__ReferenceID15">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">1990,834.5</av:Point>
+                                          <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Upload Log" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[UniqueID + &quot; has successfuly had their details uploaded.&quot;]">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:LogMessage>
+                                    </FlowStep>
+                                  </FlowStep.Next>
+                                </FlowStep>
+                              </FlowStep.Next>
                             </FlowStep>
-                          </FlowStep.Next>
-                        </FlowStep>
-                        <FlowStep x:Key="MONDAY" x:Name="__ReferenceID7">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">1390,474.5</av:Point>
-                              <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">1490,525.5 1490,555.5 2100,555.5 2100,589</av:PointCollection>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:MultipleAssign DisplayName="Assign Monday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
-                            <ui:MultipleAssign.AssignOperations>
-                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[in_Config("Tuesday User Location").ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[RollMonday]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                              </scg:List>
-                            </ui:MultipleAssign.AssignOperations>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:MultipleAssign>
-                          <FlowStep.Next>
-                            <x:Reference>__ReferenceID0</x:Reference>
-                          </FlowStep.Next>
-                        </FlowStep>
-                        <FlowStep x:Key="TUESDAY" x:Name="__ReferenceID8">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">1690,474.5</av:Point>
-                              <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">1790,525.5 1790,555.5 2100,555.5 2100,589</av:PointCollection>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:MultipleAssign DisplayName="Assign Tuesday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
-                            <ui:MultipleAssign.AssignOperations>
-                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[in_Config("Wednesday User Location").ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[RollTuesday]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                              </scg:List>
-                            </ui:MultipleAssign.AssignOperations>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:MultipleAssign>
-                          <FlowStep.Next>
-                            <x:Reference>__ReferenceID0</x:Reference>
-                          </FlowStep.Next>
-                        </FlowStep>
-                        <FlowStep x:Key="WEDNESDAY" x:Name="__ReferenceID10">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">2300,474.5</av:Point>
-                              <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">2400,525.5 2400,555.5 2100,555.5 2100,589</av:PointCollection>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:MultipleAssign DisplayName="Assign Wednesday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_7">
-                            <ui:MultipleAssign.AssignOperations>
-                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[in_Config("Thursday User Location").ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[RollWednesday]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                              </scg:List>
-                            </ui:MultipleAssign.AssignOperations>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:MultipleAssign>
-                          <FlowStep.Next>
-                            <x:Reference>__ReferenceID0</x:Reference>
-                          </FlowStep.Next>
-                        </FlowStep>
-                        <FlowStep x:Key="FRIDAY" x:Name="__ReferenceID11">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <av:Point x:Key="ShapeLocation">2600,474.5</av:Point>
-                              <av:Size x:Key="ShapeSize">200,51</av:Size>
-                              <av:PointCollection x:Key="ConnectorLocation">2700,525.5 2700,555.5 2100,555.5 2100,589</av:PointCollection>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:MultipleAssign DisplayName="Assign Friday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
-                            <ui:MultipleAssign.AssignOperations>
-                              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[in_Config("Winners List").ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
-                                  <ui:AssignOperation.To>
-                                    <OutArgument x:TypeArguments="x:String">[RollFriday]</OutArgument>
-                                  </ui:AssignOperation.To>
-                                  <ui:AssignOperation.Value>
-                                    <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
-                                  </ui:AssignOperation.Value>
-                                </ui:AssignOperation>
-                              </scg:List>
-                            </ui:MultipleAssign.AssignOperations>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:MultipleAssign>
-                          <FlowStep.Next>
-                            <x:Reference>__ReferenceID0</x:Reference>
-                          </FlowStep.Next>
-                        </FlowStep>
-                      </FlowSwitch>
+                            <FlowStep x:Key="MONDAY" x:Name="__ReferenceID8">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">1380,644.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">1480,695.5 1480,725.5 2090,725.5 2090,759</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Assign Monday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[in_Config("Tuesday User Location").ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[RollMonday]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:MultipleAssign>
+                              <FlowStep.Next>
+                                <x:Reference>__ReferenceID0</x:Reference>
+                              </FlowStep.Next>
+                            </FlowStep>
+                            <FlowStep x:Key="TUESDAY" x:Name="__ReferenceID9">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">1680,644.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">1780,695.5 1780,725.5 2090,725.5 2090,759</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Assign Tuesday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[in_Config("Wednesday User Location").ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[RollTuesday]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:MultipleAssign>
+                              <FlowStep.Next>
+                                <x:Reference>__ReferenceID0</x:Reference>
+                              </FlowStep.Next>
+                            </FlowStep>
+                            <FlowStep x:Key="WEDNESDAY" x:Name="__ReferenceID11">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">2290,644.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">2390,695.5 2390,725.5 2090,725.5 2090,759</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Assign Wednesday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_7">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[in_Config("Thursday User Location").ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[RollWednesday]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:MultipleAssign>
+                              <FlowStep.Next>
+                                <x:Reference>__ReferenceID0</x:Reference>
+                              </FlowStep.Next>
+                            </FlowStep>
+                            <FlowStep x:Key="FRIDAY" x:Name="__ReferenceID12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">2590,644.5</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">2690,695.5 2690,725.5 2090,725.5 2090,759</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Assign Friday Variables" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[TodaysQueue]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[in_Config("Winners List").ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:String">[RollFriday]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:String">[TotalRollForToday.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:MultipleAssign>
+                              <FlowStep.Next>
+                                <x:Reference>__ReferenceID0</x:Reference>
+                              </FlowStep.Next>
+                            </FlowStep>
+                          </FlowSwitch>
+                        </FlowStep.Next>
+                      </FlowStep>
                     </FlowStep.Next>
                   </FlowStep>
                 </FlowDecision.True>
                 <FlowDecision.False>
-                  <FlowStep x:Name="__ReferenceID6">
+                  <FlowStep x:Name="__ReferenceID5">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <av:Point x:Key="ShapeLocation">2029,180</av:Point>
-                        <av:Size x:Key="ShapeSize">262,60</av:Size>
-                        <av:PointCollection x:Key="ConnectorLocation">2160,240 2160,270 1997.5,270 1997.5,296.5</av:PointCollection>
+                        <av:Point x:Key="ShapeLocation">2180,4.5</av:Point>
+                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                        <av:PointCollection x:Key="ConnectorLocation">2180,30 2150,30 2150,20 2110,20</av:PointCollection>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Single Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Int32">[TotalRollForToday]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Int32">[RandomRoll]</InArgument>
-                      </Assign.Value>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </Assign>
+                    <ui:ForEach x:TypeArguments="scg:List(x:String)" CurrentIndex="{x:Null}" DisplayName="Iterating through user list" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[io_UserRollList]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="scg:List(x:String)">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="scg:List(x:String)" Name="User" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="User Actions" sap:VirtualizedContainerService.HintSize="567,599" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="525,98" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                              <ui:MultipleAssign.AssignOperations>
+                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                                    <ui:AssignOperation.To>
+                                      <OutArgument x:TypeArguments="x:String">[RollID]</OutArgument>
+                                    </ui:AssignOperation.To>
+                                    <ui:AssignOperation.Value>
+                                      <InArgument x:TypeArguments="x:String">[User(0)]</InArgument>
+                                    </ui:AssignOperation.Value>
+                                  </ui:AssignOperation>
+                                </scg:List>
+                              </ui:MultipleAssign.AssignOperations>
+                            </ui:MultipleAssign>
+                            <If Condition="[UniqueID = RollID]" sap:VirtualizedContainerService.HintSize="525,369" sap2010:WorkflowViewState.IdRef="If_1">
+                              <If.Then>
+                                <Sequence DisplayName="ID Match" sap:VirtualizedContainerService.HintSize="380,221" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_10">
+                                    <ui:MultipleAssign.AssignOperations>
+                                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:Boolean">[ExtraRoll]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="scg:List(x:String)">[UserWantsRoll]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="scg:List(x:String)">[User]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                      </scg:List>
+                                    </ui:MultipleAssign.AssignOperations>
+                                  </ui:MultipleAssign>
+                                </Sequence>
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
                     <FlowStep.Next>
-                      <x:Reference>__ReferenceID1</x:Reference>
+                      <FlowStep x:Name="__ReferenceID16">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <av:Point x:Key="ShapeLocation">1910,9</av:Point>
+                            <av:Size x:Key="ShapeSize">200,22</av:Size>
+                            <av:PointCollection x:Key="ConnectorLocation">2010,31 2010,47.04 1970,47.04 1970,56.5</av:PointCollection>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <RemoveFromCollection x:TypeArguments="scg:List(x:String)" Collection="[io_UserRollList]" DisplayName="Removes Roll Wanter" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="RemoveFromCollection`1_3" Item="[UserWantsRoll]" />
+                        <FlowStep.Next>
+                          <FlowDecision x:Name="__ReferenceID4" Condition="[ExtraRoll]" DisplayName="Has user asked for 2 rolls" sap:VirtualizedContainerService.HintSize="136,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <av:Point x:Key="ShapeLocation">1902,56.5</av:Point>
+                                <av:Size x:Key="ShapeSize">136,87</av:Size>
+                                <x:String x:Key="TrueLabel">User asked for another roll</x:String>
+                                <x:String x:Key="FalseLabel">User has not asked for a nother roll</x:String>
+                                <av:PointCollection x:Key="TrueConnector">1902,100 1872,100 1872,120 1771,120</av:PointCollection>
+                                <av:PointCollection x:Key="FalseConnector">2038,100 2068,100 2068,240 2100,240</av:PointCollection>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <FlowDecision.True>
+                              <FlowStep x:Name="__ReferenceID17">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <av:Point x:Key="ShapeLocation">1509,90</av:Point>
+                                    <av:Size x:Key="ShapeSize">262,60</av:Size>
+                                    <av:PointCollection x:Key="ConnectorLocation">1640,150 1640,180 1780,180 1780,214.5</av:PointCollection>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign DisplayName="Assign Second Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[SecondRandomRoll]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[new Random().Next(1,10)]</InArgument>
+                                  </Assign.Value>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </Assign>
+                                <FlowStep.Next>
+                                  <FlowStep x:Name="__ReferenceID14">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <av:Point x:Key="ShapeLocation">1680,214.5</av:Point>
+                                        <av:Size x:Key="ShapeSize">200,51</av:Size>
+                                        <av:PointCollection x:Key="ConnectorLocation">1780,265.5 1780,295.5 1790,295.5 1790,340</av:PointCollection>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Roll User" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[UniqueID + &quot; has asked for another roll&quot; + vbNewLine + &quot;They rolled a &quot; + RandomRoll.ToString + &quot; and a &quot; + SecondRandomRoll.ToString]">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:LogMessage>
+                                    <FlowStep.Next>
+                                      <FlowStep x:Name="__ReferenceID6">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <av:Point x:Key="ShapeLocation">1659,340</av:Point>
+                                            <av:Size x:Key="ShapeSize">262,60</av:Size>
+                                            <av:PointCollection x:Key="ConnectorLocation">1790,400 1790,430 1952.5,430 1952.5,466.5</av:PointCollection>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign DisplayName="Double Roll" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:Int32">[TotalRollForToday]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:Int32">[RandomRoll + SecondRandomRoll]</InArgument>
+                                          </Assign.Value>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </Assign>
+                                        <FlowStep.Next>
+                                          <x:Reference>__ReferenceID1</x:Reference>
+                                        </FlowStep.Next>
+                                      </FlowStep>
+                                    </FlowStep.Next>
+                                  </FlowStep>
+                                </FlowStep.Next>
+                              </FlowStep>
+                            </FlowDecision.True>
+                            <FlowDecision.False>
+                              <x:Reference>__ReferenceID2</x:Reference>
+                            </FlowDecision.False>
+                          </FlowDecision>
+                        </FlowStep.Next>
+                      </FlowStep>
                     </FlowStep.Next>
                   </FlowStep>
                 </FlowDecision.False>
@@ -614,18 +741,25 @@
           </FlowStep>
         </FlowStep.Next>
       </FlowStep>
-      <x:Reference>__ReferenceID2</x:Reference>
-      <x:Reference>__ReferenceID1</x:Reference>
       <x:Reference>__ReferenceID3</x:Reference>
+      <x:Reference>__ReferenceID1</x:Reference>
       <x:Reference>__ReferenceID4</x:Reference>
       <x:Reference>__ReferenceID5</x:Reference>
       <x:Reference>__ReferenceID6</x:Reference>
-      <x:Reference>__ReferenceID0</x:Reference>
       <x:Reference>__ReferenceID7</x:Reference>
+      <x:Reference>__ReferenceID0</x:Reference>
       <x:Reference>__ReferenceID8</x:Reference>
       <x:Reference>__ReferenceID9</x:Reference>
       <x:Reference>__ReferenceID10</x:Reference>
       <x:Reference>__ReferenceID11</x:Reference>
+      <x:Reference>__ReferenceID12</x:Reference>
+      <x:Reference>__ReferenceID13</x:Reference>
+      <x:Reference>__ReferenceID14</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
+      <x:Reference>__ReferenceID15</x:Reference>
+      <x:Reference>__ReferenceID16</x:Reference>
+      <x:Reference>__ReferenceID17</x:Reference>
+      <x:Reference>__ReferenceID18</x:Reference>
     </Flowchart>
   </Sequence>
 </Activity>
