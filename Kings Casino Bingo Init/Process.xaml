@@ -194,7 +194,7 @@
         <InArgument x:TypeArguments="x:Int32" x:Key="Friday Draw">
           <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="FridayDraw" />
         </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Total Draw">
+        <InArgument x:TypeArguments="x:Int32" x:Key="Total Roll">
           <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="TotalDraw" />
         </InArgument>
       </ui:AddQueueItem.ItemInformation>
