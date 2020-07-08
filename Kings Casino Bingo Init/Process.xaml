@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1206,652</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1206,838</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="21">
@@ -60,12 +60,18 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="380,447" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="380,633" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="UniqueID" />
       <Variable x:TypeArguments="x:String" Name="FirstName" />
       <Variable x:TypeArguments="x:String" Name="LastName" />
       <Variable x:TypeArguments="x:String" Name="UserEmail" />
+      <Variable x:TypeArguments="x:Int32" Name="MondayDraw" />
+      <Variable x:TypeArguments="x:Int32" Name="TuesdayDraw" />
+      <Variable x:TypeArguments="x:Int32" Name="WednesdayDraw" />
+      <Variable x:TypeArguments="x:Int32" Name="ThursdayDraw" />
+      <Variable x:TypeArguments="x:Int32" Name="FridayDraw" />
+      <Variable x:TypeArguments="x:Int32" Name="TotalDraw" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -73,9 +79,9 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,191" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,377" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
             <ui:AssignOperation.To>
               <OutArgument x:TypeArguments="x:String">[UniqueID]</OutArgument>
@@ -108,22 +114,88 @@
               <InArgument x:TypeArguments="x:String">[in_User("Email").ToString]</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[MondayDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[TuesdayDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[WednesdayDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[ThursdayDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[FridayDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Int32">[TotalDraw]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Int32">[MondayDraw + TuesdayDraw+WednesdayDraw + ThursdayDraw + FridayDraw]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
     <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_Config(&quot;Kings Casino Initialised&quot;).ToString]">
       <ui:AddQueueItem.ItemInformation>
-        <InArgument x:TypeArguments="x:String" x:Key="&quot;Unique ID&quot;">
+        <InArgument x:TypeArguments="x:String" x:Key="Unique ID">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UniqueID" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="&quot;First Name&quot;">
+        <InArgument x:TypeArguments="x:String" x:Key="First Name">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="FirstName" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="&quot;Last Name&quot;">
+        <InArgument x:TypeArguments="x:String" x:Key="Last Name">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="LastName" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="&quot;Email&quot;">
+        <InArgument x:TypeArguments="x:String" x:Key="Email">
           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UserEmail" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Monday Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="MondayDraw" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Tuesday Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="TuesdayDraw" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Wednesday Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="WednesdayDraw" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Thursday Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="ThursdayDraw" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Friday Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="FridayDraw" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Total Draw">
+          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="TotalDraw" />
         </InArgument>
       </ui:AddQueueItem.ItemInformation>
     </ui:AddQueueItem>
