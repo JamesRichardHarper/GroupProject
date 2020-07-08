@@ -68,7 +68,7 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="[User Bingo]&#xD;&#xA;&#xA;[This is the daily process to automate the bingo aspect of Kings Casino. Users are loaded from UiPath Orchestrator, while our email is checked for any users wanting an extra roll. This process will then check what day it is, perform the random roll, and add an extra one if neccessery. The user's updated status will then be uploaded to Orchestrator.]&#xD;&#xA;&#xA;[Created by James Harper. An Initiation file will need ot be processed before this to uplaod the neccessery details to Orchestrator. an email being recieved with the &quot;ROLL&quot; Subject is optional.]" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="687,870" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+  <StateMachine InitialState="{x:Reference __ReferenceID3}" sap2010:Annotation.AnnotationText="[User Bingo]&#xA;&#xA;[This is the daily process to automate the bingo aspect of Kings Casino. Users are loaded from UiPath Orchestrator, while our email is checked for any users wanting an extra roll. This process will then check what day it is, perform the random roll, and add an extra one if neccessery. The user's updated status will then be uploaded to Orchestrator.]&#xA;&#xA;[Created by James Harper. An Initiation file will need ot be processed before this to uplaod the neccessery details to Orchestrator. an email being recieved with the &quot;ROLL&quot; Subject is optional.]" DisplayName="General Business Process" sap:VirtualizedContainerService.HintSize="687,870" sap2010:WorkflowViewState.IdRef="StateMachine_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -124,15 +124,9 @@
                 <TryCatch.Try>
                   <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetTransactionData workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="Framework\GetTransactionDataWorkflow.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
-                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                        <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-                      </InArgument>
-                      <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_TransactionItem">
-                        <mva:VisualBasicReference x:TypeArguments="ui:QueueItem" ExpressionText="TransactionItem" />
-                      </OutArgument>
-                      <InArgument x:TypeArguments="x:String" x:Key="in_DayOfWeek">
-                        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DayOfWeek" />
-                      </InArgument>
+                      <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                      <OutArgument x:TypeArguments="ui:QueueItem" x:Key="out_TransactionItem">[TransactionItem]</OutArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_DayOfWeek">[DayOfWeek]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                 </TryCatch.Try>
@@ -220,8 +214,18 @@
                       </Assign>
                       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Process workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Process.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[TransactionItem]</InArgument>
-                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
+                            <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="TransactionItem" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                            <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                          </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_DayOfWeek">
+                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DayOfWeek" />
+                          </InArgument>
+                          <InOutArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="io_UserRollList">
+                            <mva:VisualBasicReference x:TypeArguments="scg:List(scg:List(x:String))" ExpressionText="UserRollList" />
+                          </InOutArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                     </Sequence>
@@ -423,27 +427,13 @@
                               </If>
                               <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Process used to load all the emails that have been recieved today (but will not mark them as read). If they have a subject of &quot;ROLL&quot; then the unique ID sent inside the email will be added to a user list, for an extra ball roll on their next roll." DisplayName="Invoke Email Processing Flow" sap:VirtualizedContainerService.HintSize="484,174" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_26" UnSafe="False" WorkflowFileName="Roll Catching/Read Email.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                                    <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-                                  </InArgument>
-                                  <OutArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="out_EmailCollection">
-                                    <mva:VisualBasicReference x:TypeArguments="scg:List(snm:MailMessage)" ExpressionText="EmailCollection" />
-                                  </OutArgument>
-                                  <OutArgument x:TypeArguments="x:Int32" x:Key="out_TotalEmails">
-                                    <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="TotalEmails" />
-                                  </OutArgument>
-                                  <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_KingsPass">
-                                    <mva:VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="KingsPass" />
-                                  </OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="out_KingsUser">
-                                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="KingsUser" />
-                                  </OutArgument>
-                                  <OutArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="io_UserRollList">
-                                    <mva:VisualBasicReference x:TypeArguments="scg:List(scg:List(x:String))" ExpressionText="UserRollList" />
-                                  </OutArgument>
-                                  <OutArgument x:TypeArguments="x:Int32" x:Key="out_RollingUsers">
-                                    <mva:VisualBasicReference x:TypeArguments="x:Int32" ExpressionText="RollingUsersCount" />
-                                  </OutArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                                  <OutArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="out_EmailCollection">[EmailCollection]</OutArgument>
+                                  <OutArgument x:TypeArguments="x:Int32" x:Key="out_TotalEmails">[TotalEmails]</OutArgument>
+                                  <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_KingsPass">[KingsPass]</OutArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_KingsUser">[KingsUser]</OutArgument>
+                                  <OutArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="io_UserRollList">[UserRollList]</OutArgument>
+                                  <OutArgument x:TypeArguments="x:Int32" x:Key="out_RollingUsers">[RollingUsersCount]</OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
