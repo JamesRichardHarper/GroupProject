@@ -1,10 +1,19 @@
 Hello {0},
 
-Your daily draw has been processed - your number today is {1}!
+Your daily draw has been processed. Please view the numbers that have been drawn below!
 
-You're currently in {2} place!
+Monday Draw - {1}
+Tuesday Draw - {2}
+Wednesday Draw - {3}
+Thursday Draw - {4}
+Friday Draw - {5}
+This weeks total draw - {6}
 
-If you wish to increase your chances, why not add an exta ball in tomorrows draw for only £1?!
+If you wish to increase your chances, why not add an exta ball in tomorrows draw for only £1!
+
+
+
+Please note - if your number has appeared as '0', this is due to the fact the number has not yet being drawn.
 
 Best Regards,
 Kings Casino.
