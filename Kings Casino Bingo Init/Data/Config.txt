@@ -16,6 +16,7 @@
 	},
 	{
 		"User Excel Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx",
-		"User Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx"
+		"User Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Kings Casino User Database\\Kings Casino - User Database.xlsx",
+		"Gareth User Location":"C:\\Users\\garet\\Desktop\\Kings Casino - User Database (Local).xlsx"
 	}
 ]

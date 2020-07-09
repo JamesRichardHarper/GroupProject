@@ -18,6 +18,7 @@
 		"LogMessage_ApplicationException":"System exception."		
 	},
 	{
-		"Orchestrator Company Name":"Kings Casino Company Log In"
+		"Orchestrator Company Name":"Kings Casino Company Log In",
+		"Daily Draw Template":"C:\\Users\\garet\\Documents\\QA\\RPA Training\\Assignment3\\GitGroupProject\\GroupProject\\Templates\\Daily Draw Template.txt"
 	}
 ]
