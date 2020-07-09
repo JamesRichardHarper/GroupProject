@@ -1913,15 +1913,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\james\\.nuget\\packages\\": {}
+    "C:\\Users\\garet\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "UiPath Daily Report",
       "projectName": "UiPath Daily Report",
-      "projectPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\UiPath Daily Report\\.local",
-      "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\UiPath Daily Report\\.local"
+      "projectPath": "C:\\Users\\garet\\Documents\\QA\\RPA Training\\Assignment3\\GitGroupProject\\GroupProject\\UiPath Daily Report\\.local",
+      "packagesPath": "C:\\Users\\garet\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\garet\\Documents\\QA\\RPA Training\\Assignment3\\GitGroupProject\\GroupProject\\UiPath Daily Report\\.local"
     },
     "frameworks": {
       "net461": {

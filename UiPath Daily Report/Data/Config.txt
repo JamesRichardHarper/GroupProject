@@ -17,6 +17,6 @@
 		"LogMessage_ApplicationException":"System exception."		
 	},
 	{
-		"Array instantiated":"For later use"
+		"Weekly Report Queue":"Kings Casino: Final List"
 	}
 ]
