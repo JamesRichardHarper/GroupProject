@@ -1,6 +1,6 @@
 {
-  "name": "UiPath Daily Report",
-  "description": "Process built to retain a daily report for Kings Casino",
+  "name": "UiPath Weekly Report",
+  "description": "Process built to retain a weekly report for Kings Casino",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.8.5]",

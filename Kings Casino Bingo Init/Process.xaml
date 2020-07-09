@@ -165,38 +165,18 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_Config(&quot;Kings Casino Initialised&quot;).ToString]">
+    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="338,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_Config(&quot;TEST QUEUE&quot;).ToString]">
       <ui:AddQueueItem.ItemInformation>
-        <InArgument x:TypeArguments="x:String" x:Key="Unique ID">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UniqueID" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="First Name">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="FirstName" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="Last Name">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="LastName" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="Email">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="UserEmail" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Monday Draw">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="MondayDraw" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Tuesday Draw">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="TuesdayDraw" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Wednesday Draw">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="WednesdayDraw" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Thursday Draw">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="ThursdayDraw" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Friday Draw">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="FridayDraw" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="Total Roll">
-          <mva:VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="TotalDraw" />
-        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Unique ID">[UniqueID]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="First Name">[FirstName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Last Name">[LastName]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Email">[UserEmail]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Monday Draw">[MondayDraw]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Tuesday Draw">[TuesdayDraw]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Wednesday Draw">[WednesdayDraw]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Thursday Draw">[ThursdayDraw]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Friday Draw">[FridayDraw]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="Total Roll">[TotalDraw]</InArgument>
       </ui:AddQueueItem.ItemInformation>
     </ui:AddQueueItem>
   </Sequence>

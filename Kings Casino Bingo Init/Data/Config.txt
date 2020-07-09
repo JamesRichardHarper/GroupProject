@@ -2,7 +2,8 @@
 	{
 		"Kings Casino Initialised":"Kings Casino: List Initialised",
 		"logF_BusinessProcessName":"Framework",
-		"Orchestrator Company Name":"Kings Casino Company Log In"
+		"Orchestrator Company Name":"Kings Casino Company Log In",
+		"TEST QUEUE":"Kings Casino: Friday"
 	},
 	{
 		"MaxRetryNumber":"0",

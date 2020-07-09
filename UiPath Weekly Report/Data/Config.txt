@@ -1,0 +1,23 @@
+[
+	{
+		"Subject Winner":"You Won!",
+		"Subject Loser":"Your Bingo Results!",
+		"Company Log In":"Kings Casino Company Log In",
+		"Weekly Report Queue":"Kings Casino: Final List",
+		"logF_BusinessProcessName":"Framework"
+	},
+	{
+		"MaxRetryNumber":"0",
+		"ExScreenshotsFolderPath":"Exceptions_Screenshots",
+		"LogMessage_GetTransactionData":"Processing Transaction Number: ",
+		"LogMessage_GetTransactionDataError":"Error getting transaction data for Transaction Number: ",
+		"LogMessage_Success":"Transaction Successful.",
+		"LogMessage_BusinessRuleException":"Business rule exception.",
+		"LogMessage_ApplicationException":"System exception."		
+	},
+	{
+		"Report Location":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Weekly Reports",
+		"Lose Template":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Templates\\Friday Draw Loser Template.txt",
+		"Win Template":"C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\Project Final\\Templates\\Friday Draw Winner Template.txt"
+	}
+]
