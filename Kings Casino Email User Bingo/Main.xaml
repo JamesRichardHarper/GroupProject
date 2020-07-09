@@ -215,21 +215,11 @@
                       </Assign>
                       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Process workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Process.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-                            <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="TransactionItem" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                            <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_DayOfWeek">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DayOfWeek" />
-                          </InArgument>
-                          <InOutArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="io_UserRollList">
-                            <mva:VisualBasicReference x:TypeArguments="scg:List(scg:List(x:String))" ExpressionText="UserRollList" />
-                          </InOutArgument>
-                          <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_UserReport">
-                            <mva:VisualBasicReference x:TypeArguments="scg:List(x:String)" ExpressionText="UserReport" />
-                          </OutArgument>
+                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[TransactionItem]</InArgument>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_DayOfWeek">[DayOfWeek]</InArgument>
+                          <InOutArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="io_UserRollList">[UserRollList]</InOutArgument>
+                          <OutArgument x:TypeArguments="scg:List(x:String)" x:Key="out_UserReport">[UserReport]</OutArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                       <AddToCollection x:TypeArguments="scg:List(x:String)" Collection="[TotalUserReports]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[UserReport]" />
@@ -448,7 +438,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:InvokeWorkflowFile>
-                              <ui:MultipleAssign sap2010:Annotation.AnnotationText="Gets the day of the week and converts it to all upper case.&#xD;&#xA;Also initiates a llist of arrays, containing user generated data." DisplayName="Variable Set Up." sap:VirtualizedContainerService.HintSize="484,201" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                              <ui:MultipleAssign sap2010:Annotation.AnnotationText="Gets the day of the week and converts it to all upper case.&#xA;Also initiates a llist of arrays, containing user generated data." DisplayName="Variable Set Up." sap:VirtualizedContainerService.HintSize="484,201" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                                 <ui:MultipleAssign.AssignOperations>
                                   <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                                     <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -675,9 +665,9 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <Transition.To>
-            <State x:Name="__ReferenceID4" sap2010:Annotation.AnnotationText="Generates a report using the cumulative data from the 'Process Transaction' state. This state also borrows from the error handling resolved in that state." DisplayName="Report" sap:VirtualizedContainerService.HintSize="484,992" sap2010:WorkflowViewState.IdRef="State_5">
+            <State x:Name="__ReferenceID4" sap2010:Annotation.AnnotationText="Generates a report using the cumulative data from the 'Process Transaction' state. This state also borrows from the error handling resolved in that state." DisplayName="Report" sap:VirtualizedContainerService.HintSize="484,930" sap2010:WorkflowViewState.IdRef="State_5">
               <State.Entry>
-                <TryCatch DisplayName="Try to process report import" sap:VirtualizedContainerService.HintSize="438,590" sap2010:WorkflowViewState.IdRef="TryCatch_11">
+                <TryCatch DisplayName="Try to process report import" sap:VirtualizedContainerService.HintSize="438,528" sap2010:WorkflowViewState.IdRef="TryCatch_11">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -685,7 +675,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <TryCatch.Try>
-                    <Sequence DisplayName="Processthrough the current reports" sap:VirtualizedContainerService.HintSize="376,341" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                    <Sequence DisplayName="Processthrough the current reports" sap:VirtualizedContainerService.HintSize="376,279" sap2010:WorkflowViewState.IdRef="Sequence_29">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -701,7 +691,7 @@
                       </Assign>
                       <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Report Send Off workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="Report Send Off.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="in_UserReport">
+                          <InArgument x:TypeArguments="scg:List(scg:List(x:String))" x:Key="in_UserReports">
                             <mva:VisualBasicValue x:TypeArguments="scg:List(scg:List(x:String))" ExpressionText="TotalUserReports" />
                           </InArgument>
                           <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
@@ -715,7 +705,6 @@
                           </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
-                      <AddToCollection x:TypeArguments="scg:List(x:String)" Collection="[TotalUserReports]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_2" Item="[UserReport]" />
                     </Sequence>
                   </TryCatch.Try>
                   <TryCatch.Catches>
