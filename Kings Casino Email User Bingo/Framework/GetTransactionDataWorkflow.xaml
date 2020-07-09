@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>2124,918</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>2124,958</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetTransactionDataWorkflow_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -68,7 +68,7 @@
         <av:Point x:Key="ShapeLocation">1070,0</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-        <av:PointCollection x:Key="ConnectorLocation">1100,75 1100,125</av:PointCollection>
+        <av:PointCollection x:Key="ConnectorLocation">1070,37.5 1052.5,37.5 1052.5,95 1082.5,95 1082.5,125</av:PointCollection>
         <x:Double x:Key="Width">2100</x:Double>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
@@ -93,6 +93,9 @@
           </ui:LogMessage>
         </FlowStep>
       </FlowSwitch.Default>
+      <FlowSwitch.Expression>
+        <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_DayOfWeek" />
+      </FlowSwitch.Expression>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">1065,125</av:Point>

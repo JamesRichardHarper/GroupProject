@@ -1,11 +1,10 @@
 [
-	{	
+	{
 		"Monday User Location":"Kings Casino: List Initialised",
 		"Tuesday User Location":"Kings Casino: Tuesday",
 		"Wednesday User Location":"Kings Casino: Wednesday",
 		"Thursday User Location":"Kings Casino: Thursday",
 		"Friday User Location":"Kings Casino: Friday",
-		"Winners List":"Kings Casino: Final List",
 		"logF_BusinessProcessName":"Framework"
 	},
 	{
@@ -18,6 +17,6 @@
 		"LogMessage_ApplicationException":"System exception."		
 	},
 	{
-		"Orchestrator Company Name":"Kings Casino Company Log In"
+		"Array instantiated":"For later use"
 	}
 ]
