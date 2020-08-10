@@ -1913,15 +1913,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Daryl Atienza\\.nuget\\packages\\": {}
+    "C:\\Users\\james\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "Kings Casino Email User Bingo",
       "projectName": "Kings Casino Email User Bingo",
-      "projectPath": "C:\\Users\\Daryl Atienza\\Desktop\\RPA\\GIT.RPA.FINAL PROJECT\\GroupProject\\Kings Casino Email User Bingo\\.local",
-      "packagesPath": "C:\\Users\\Daryl Atienza\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Daryl Atienza\\Desktop\\RPA\\GIT.RPA.FINAL PROJECT\\GroupProject\\Kings Casino Email User Bingo\\.local"
+      "projectPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\GroupProject\\Kings Casino Email User Bingo\\.local",
+      "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\james\\Documents\\Work\\QA Consulting\\Training Notes\\GroupProject\\Kings Casino Email User Bingo\\.local"
     },
     "frameworks": {
       "net461": {
